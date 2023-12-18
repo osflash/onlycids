@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { type DropEvent, type FileRejection, useDropzone } from 'react-dropzone'
-import { useCopyToClipboard } from 'react-use'
 
 import Link from 'next/link'
 
@@ -48,6 +47,16 @@ type UploadError = {
 
 const token = process.env.NEXT_PUBLIC_NFT_STORAGE_TOKEN
 
+const disabledStatus = ['uploading', 'waiting']
+
+const handleFiles = (files: File[]) => {
+  if (files.length === 1) {
+    return NFTStorage.encodeBlob(files[0])
+  }
+
+  return NFTStorage.encodeDirectory(files)
+}
+
 export const UploadFiles: React.FC = () => {
   const [CID, setCID] = useState<string | undefined>(undefined)
   const [errors, setErrors] = useState<string[]>([])
@@ -64,13 +73,15 @@ export const UploadFiles: React.FC = () => {
   ) => {
     setCID(undefined)
     setErrors([])
-    setProgress(0)
+    setProgress(0.001)
+    setStatus('waiting')
 
     const uploadProgress = new Map<number, number>()
 
-    const { car } = await NFTStorage.encodeDirectory(acceptedFiles)
+    const { cid,car } = await handleFiles(acceptedFiles)
 
-    setStatus('waiting')
+    setCID(cid)
+
     const blobs = await splitter(car)
 
     await PromisePool.withConcurrency(1)
@@ -122,7 +133,7 @@ export const UploadFiles: React.FC = () => {
     onDrop: onDrop,
     multiple: true,
     useFsAccessApi: false,
-    disabled: status === 'uploading'
+    disabled: disabledStatus.includes(status)
   })
 
   const onCheckedChange = (checked: CheckedState) => {
@@ -194,7 +205,7 @@ export const UploadFiles: React.FC = () => {
           'relative flex aspect-video cursor-pointer flex-col items-center rounded-md border border-dashed text-sm text-muted-foreground hover:bg-primary/5',
           {
             'border-green-500': isDragAccept,
-            'cursor-progress border-orange-500': status === 'uploading'
+            'cursor-progress border-orange-500': disabledStatus.includes(status)
           }
         )}
         {...getRootProps()}
