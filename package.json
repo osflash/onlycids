@@ -31,7 +31,7 @@
     "next": "latest",
     "next-themes": "^0.2.1",
     "nft.storage": "^7.1.1",
-    "postcss": "8.4.29",
+    "postcss": "8.4.31",
     "react": "latest",
     "react-dom": "latest",
     "react-dropzone": "^14.2.3",
