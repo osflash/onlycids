@@ -193,7 +193,9 @@ export const UploadFiles: React.FC = () => {
           'relative flex aspect-video cursor-pointer flex-col items-center rounded-md border border-dashed text-sm text-muted-foreground hover:bg-primary/5',
           {
             'border-green-500': isDragAccept,
-            'cursor-progress border-orange-500': disabledStatus.includes(status)
+            'border-orange-500': disabledStatus.includes(status),
+            'cursor-progress': status === 'uploading',
+            'cursor-wait': status === 'waiting'
           }
         )}
         {...getRootProps()}
