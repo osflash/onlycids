@@ -168,12 +168,9 @@ export const UploadFiles: React.FC = () => {
               Enable folder upload
             </label>
 
-            <Tooltip>
-              <TooltipTrigger asChild>
+
                 <p className="text-sm text-muted-foreground">
-                  By checking this box, you can upload entire folders. There are
-                  no limits enforced by the service, other than the size limit
-                  of 31GiB per individual upload.
+                  By checking this box, you can upload entire folders.
                   <Button variant="link" className="h-fit px-2 py-0" asChild>
                     <Link
                       href="https://nft.storage/faq/#is-there-a-limit-on-numbers-of-files-in-a-directory"
@@ -184,16 +181,7 @@ export const UploadFiles: React.FC = () => {
                     </Link>
                   </Button>
                 </p>
-              </TooltipTrigger>
 
-              <TooltipContent
-                side="bottom"
-                className="bg-destructive text-destructive-foreground shadow-sm"
-              >
-                Keep in mind that uploading large directories, especially
-                through your browser, may require substantial computer memory.
-              </TooltipContent>
-            </Tooltip>
           </div>
         </div>
       )}
@@ -225,8 +213,9 @@ export const UploadFiles: React.FC = () => {
             side="bottom"
             className="bg-destructive text-destructive-foreground shadow-sm"
           >
-            There are no limits enforced by the service, other than the size
-            limit of 31GiB per individual upload.
+            There are no restrictions imposed by the service, except for the 31 GiB size limit per individual upload.
+
+Please be aware that uploading extensive directories, particularly through your browser, may necessitate a significant amount of computer memory.
           </TooltipContent>
         </Tooltip>
       </label>
