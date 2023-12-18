@@ -224,8 +224,7 @@ Please be aware that uploading extensive directories, particularly through your 
 
       {progress != 0 && <Progress value={progress * 100} className="w-full" />}
 
-      {errors &&
-        errors.map((error, i) => (
+      {errors.map((error, i) => (
           <div
             key={error + i}
             className="bg-destructive px-2 py-1.5 text-xs text-destructive-foreground shadow-sm"
@@ -233,6 +232,7 @@ Please be aware that uploading extensive directories, particularly through your 
             {error}
           </div>
         ))}
+
       {CID && <CopyLink cid={CID} />}
     </div>
   )
