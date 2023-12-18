@@ -25,7 +25,7 @@ export const CopyLink: React.FC<CopyLinkProps> = ({ cid }) => {
   }
 
   return (
-    <div className="flex space-x-2">
+    <div className="flex">
       <Label htmlFor="link" className="sr-only">
         Link
       </Label>
